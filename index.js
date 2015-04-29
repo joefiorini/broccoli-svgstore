@@ -78,17 +78,18 @@ function parseSvg (filename, fileContents, options) {
     viewBox = $svg.attr("viewBox");
     var tag = "<symbol ";
     var identifer = path.basename(filename).replace(/\.[^/.]+$/, "");
+    var classNames = camelize(identifier);
 
     if (options.preferClasses) {
         if (options.suitComponent) {
-            identifer = options.suitComponent + " " + options.suitComponent + "--" + camelize(identifer);
+            classNames = options.suitComponent + " " + options.suitComponent + "--" + camelize(identifer);
         }
-        tag += "class='" + identifer + "'";
-    } else {
-        tag += "id='" + identifer + "'";
+        tag += "class='" + classNames + "' ";
     }
+    tag += "id='" + identifer + "' ";
+    
 
-    tag += " viewBox='" + viewBox + "'></symbol>";
+    tag += "viewBox='" + viewBox + "'></symbol>";
 
     $outputContents = cheerio.load(tag, { xmlMode: true }),
     $symbol = $outputContents("symbol");
