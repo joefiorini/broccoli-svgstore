@@ -77,16 +77,16 @@ function parseSvg (filename, fileContents, options) {
     $svg = $fileContents("svg"),
     viewBox = $svg.attr("viewBox");
     var tag = "<symbol ";
-    var identifer = path.basename(filename).replace(/\.[^/.]+$/, "");
+    var identifier = path.basename(filename).replace(/\.[^/.]+$/, "");
     var classNames = camelize(identifier);
 
     if (options.preferClasses) {
         if (options.suitComponent) {
-            classNames = options.suitComponent + " " + options.suitComponent + "--" + camelize(identifer);
+            classNames = options.suitComponent + " " + options.suitComponent + "--" + camelize(identifier);
         }
         tag += "class='" + classNames + "' ";
     }
-    tag += "id='" + identifer + "' ";
+    tag += "id='" + identifier + "' ";
     
 
     tag += "viewBox='" + viewBox + "'></symbol>";
